@@ -12,6 +12,8 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Context as AuthContext } from "./src/context/AuthContext";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -66,14 +68,8 @@ const BotttomTabNavigator = (
 );
 
 const SigninNavigator = (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Signup"
-      component={SignupScreen}
-      options={{
-        header: () => null
-      }}
-    />
+  <Stack.Navigator headerMode="none">
+    <Stack.Screen name="Signup" component={SignupScreen} />
     <Stack.Screen name="Signin" component={SigninScreen} />
   </Stack.Navigator>
 );
@@ -91,7 +87,9 @@ const App = () => {
 export default () => {
   return (
     <AuthProvider>
-      <App />
+      <SafeAreaProvider>
+        <App />
+      </SafeAreaProvider>
     </AuthProvider>
   );
 };
