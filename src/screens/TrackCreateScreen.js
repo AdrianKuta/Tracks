@@ -1,5 +1,5 @@
-import "../_mockLocation";
-import React, { useEffect, useState } from "react";
+//import "../_mockLocation";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,9 +9,11 @@ import {
   Accuracy
 } from "expo-location";
 import Map from "../components/Map";
+import { Context as LocationContext } from "../context/LocationContext";
 
 const TrackCreateScreen = () => {
   const [permissionStatus, setPermissionStatus] = useState(null);
+  const { addLocation } = useContext(LocationContext);
 
   const startWatching = async () => {
     const { status } = await requestPermissionsAsync();
@@ -23,7 +25,7 @@ const TrackCreateScreen = () => {
         distanceInterval: 10
       },
       location => {
-        console.log(location);
+        addLocation(location);
       }
     );
   };
