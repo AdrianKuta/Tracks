@@ -26,11 +26,20 @@ export default (shouldTrack, callback) => {
   useEffect(() => {
     if (shouldTrack) {
       startWatching();
+      console.log("Subscribe");
     } else {
       subscriber.remove();
       setSubscriber(null);
     }
-  }, [shouldTrack]);
+
+    return () => {
+      //Issue: Not called after second call.
+      if (subscriber) {
+        console.log("Remove subscriber");
+        subscriber.remove();
+      }
+    };
+  }, [shouldTrack, callback]);
 
   return [permissionStatus];
 };

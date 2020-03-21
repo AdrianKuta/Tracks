@@ -12,7 +12,6 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Context as AuthContext } from "./src/context/AuthContext";
-import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider as LocationProvider } from "./src/context/LocationContext";
 
