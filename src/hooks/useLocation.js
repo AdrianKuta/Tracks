@@ -10,6 +10,9 @@ export default (shouldTrack, callback) => {
   const [subscriber, setSubscriber] = useState(null);
 
   const startWatching = async () => {
+    if (subscriber) {
+      subscriber.remove();
+    }
     const { status } = await requestPermissionsAsync();
     setPermissionStatus(status);
     const sub = await watchPositionAsync(
@@ -26,16 +29,13 @@ export default (shouldTrack, callback) => {
   useEffect(() => {
     if (shouldTrack) {
       startWatching();
-      console.log("Subscribe");
     } else {
       subscriber.remove();
       setSubscriber(null);
     }
 
     return () => {
-      //Issue: Not called after second call.
       if (subscriber) {
-        console.log("Remove subscriber");
         subscriber.remove();
       }
     };
